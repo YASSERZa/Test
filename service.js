@@ -8,5 +8,7 @@ app.get('/*', function(req,res) {
 res.sendFile(path.join(__dirname+'/dist/<name-of-app>/index.html'));
 });
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 4200);
-
+const server = app.listen(process.env.PORT || 8080, () => {
+    const port = server.address().port;
+    console.log(`Express is working on port ${port}`);
+  });
