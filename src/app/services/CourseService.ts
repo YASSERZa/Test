@@ -6,10 +6,10 @@ import { Injectable } from "@angular/core";
 export class CourseService {
 
   findAllCourses = () =>
-    fetch('http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/m/p/course/c').then(response => response.json());
+    fetch('http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/c').then(response => response.json());
 
    AddCourse(Course: any) {
-     fetch('http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/m/p/course/c/p', {
+     fetch('http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/c/p', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -30,12 +30,12 @@ export class CourseService {
       body: JSON.stringify(module)
     });
 
-    alert("Done!");
+    alert.call("Done!");
   }
 
 
   async AddLesson(module_Id: any, module: any) {
-    fetch(`http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/m/p/course/l/p/module/${module_Id}`, {
+    fetch(`http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/l/p/${module_Id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
