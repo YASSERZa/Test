@@ -6,10 +6,10 @@ import { Injectable } from "@angular/core";
 export class CourseService {
 
   findAllCourses = () =>
-    fetch('http://localhost:8080/c').then(response => response.json());
+    fetch('http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/m/p/course/c').then(response => response.json());
 
    AddCourse(Course: any) {
-     fetch('http://localhost:8080/c/p', {
+     fetch('http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/m/p/course/c/p', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -22,7 +22,7 @@ export class CourseService {
 
 
    AddModule(course_Id: any, module: any) {
-     fetch(`http://localhost:8080/m/p/course/${course_Id}`, {
+     fetch(`http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/m/p/course/${course_Id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -35,7 +35,7 @@ export class CourseService {
 
 
   async AddLesson(module_Id: any, module: any) {
-    fetch(`http://localhost:8080/l/p/module/${module_Id}`, {
+    fetch(`http://newtest1.eba-ajaqzjma.us-east-1.elasticbeanstalk.com/m/p/course/l/p/module/${module_Id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
