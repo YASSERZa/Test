@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from "../services/CourseService";
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Modal } from 'bootstrap';
 
 
 
@@ -14,88 +15,67 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class CourseNavigatorComponent implements OnInit {
-  
-  courses : any[] | undefined; 
-  
-  
 
-  
+  courses: any ;
+  titleC: any;
+  titleL:any;
+  titleM: any;
+  author: any;
 
-  OnSubmit(data: any){
-    this.http.post('http://localhost:8080/api/v1/courses', data).
-    subscribe((result)=>{
-console.warn("result",result)
+selectedCourse = { 
+  modules:[] as any[],
+  id:undefined
+}
 
-    })
-    console.warn(data);
+selectedModules = {
+  lessons:[] as any[],
+  id:undefined
+}
 
-  }
-  
+selectedLesson = {
 
-  
-  selectedCourse= { 
-    module: [] as any[],
-    id: undefined
-  }
+id:undefined}
+  openform: boolean | undefined;
 
+  constructor(private CourseService : CourseService
+    ,private router: Router ) { }
 
-
-  
-  selectedModules= { 
-    lesson: [] as any[],
-    id: undefined
-  }
-
-
-
-  selectedLesson= { 
-   
-    id: undefined
-  }
-
-
-  
-
-
-  constructor(private CourseService : CourseService, private router:Router, private http:HttpClient ) { }
-  
 
   ngOnInit(): void {
-    
-
-  this.CourseService.findAllCourses().
-  then(courses => this.courses = courses);
-
-
-  }
-
-
-
+    this.CourseService.findAllCourses().then(courses => this.courses = courses);
+    const element = document.getElementById('myModal') as HTMLElement;
+    const myModal = new Modal(element);
+    myModal.show();
   
-  selectCourse(course: any) {
-    this.selectedCourse = course;
   }
   
-
-
-  
+  selectCourse(course: any) { 
+     this.selectedCourse = course;}
   selectModule(module: any){
-    this.selectedModules = module;
+     this.selectedModules = module;}
+  selectLesson(lesson:any){
+     this.selectedLesson = lesson;
+  }
+
+
+
+
+  addCourse(title: string, author: string) {
+    const addCourse = {title,author}
+    this.CourseService.AddCourse(addCourse);
+    }
     
-      }
-
-      SelectLesson(lesson:any){
-this.selectedLesson = lesson;
-
-      }
 
 
-
+  addModule(name:string){
+    const addmodule = {name}
+    this.CourseService.AddModule(this.selectedCourse.id,addmodule);
+  }
   
-   
-   
-
-
-
+  
+  addLesson(title:string){
+    const newLesson = {title}
+    this.CourseService.AddLesson(this.selectedModules.id,newLesson);
+  }
 
 }

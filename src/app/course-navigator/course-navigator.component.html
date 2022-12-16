@@ -1,60 +1,132 @@
 <div class="row">
-
-
-
-      <div class="col">
-
-            <ul class="list-group">
-            <li class="list-group-item active"> Courses </li>
-            <li *ngFor="let course of courses" (click)="selectCourse(course)"
-            [ngClass]="{'active': course.id == selectedCourse.id}"
-            class="list-group-item">
-
-            {{course.title}}
-
-               </li>
-               </ul>
-               </div>
-                     
-               
-                             
-      <div class="col">
-            <ul class="list-group">
-            <li class="list-group-item active"> Modules </li>
-            <li *ngFor="let module of selectedCourse.module"(click)="selectModule(module)"
-            [ngClass]="{'active': module.id == selectedModules.id}"
-            class="list-group-item">
-
-            {{module.title}}
-
-                     </li>    
-                     </ul>  
-                     </div>
-
-
-                                          
-      <div class="col">
-        <ul class="list-group">
-        <li class="list-group-item active"> Lessons </li>
-        <li *ngFor="let lesson of selectedModules.lesson"(click)="SelectLesson(lesson)"
-        [ngClass]="{'active': lesson.id == selectedLesson.id}"
-        class="list-group-item">
-
-        {{lesson.title}}
-
-                 </li>    
-                 </ul>  
-                 </div>
-
-
+      <div class="col-4">
+  
+          <div class="list-group">
+              <li class="list-group-item active"> Courses
+  
+              </li>
+  
+  
+              <div *ngFor="let course of courses" (click)="selectCourse(course)"
+                  [ngClass]="{'active': course.id == selectedCourse.id}" class="list-group-item">
+                  {{course.title}}
                  
-                 <form #UserPost ="ngForm" (ngSubmit)="OnSubmit(UserPost.value)" >
-                 <input type="text" name="title" ngModel placeholder="title name"> <br><br>
-                 <input type="text" name="author" ngModel placeholder="author name"> <br><br>
-                 <button type="submit">Add Course!</button>
-                 </form>
+              </div>
+              
+          </div>
+  
+      </div>
+  
+      <div class="col">
+          <ul class="list-group">
+              <li class="list-group-item active"> Modules </li>
+              <li *ngFor="let module of selectedCourse.modules" (click)="selectModule(module)"
+                  [ngClass]="{'active': module.id == selectedModules.id}" class="list-group-item">
+                  {{module.name}}
+                  
+  
+              </li>
+          </ul>
+      </div>
+  
+      <div class="col">
+          <ul class="list-group">
+              <li class="list-group-item active"> Lessons </li>
+              <li *ngFor="let lesson of selectedModules.lessons" (click)="selectLesson(lesson)"
+                  [ngClass]="{'active': lesson.id == selectedLesson.id}" class="list-group-item">
+                  {{lesson.title}}
+                 
+  
+              </li>
+          </ul>
+      </div>
+     
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="modal modal-sheet position-static d-block " id="selectCourse">
+          <div class="modal-dialog ">
+              <div class="modal-content ">
+                  <div class="modal-header ">
+                      <h1 class="modal-title fs-5">Add Course</h1>
+                  </div>
+                  <div class="modal-body py-0">
+                      <br />
+                      Enter course title:
+                      <input [(ngModel)]="titleC">
+                      <br />
+                      <br />
+                      Enter course author:
+                      <input [(ngModel)]="author">
+                      <br />
+                  </div>
+                  <div class="modal-footer flex-column border-top-0">
+                      <button type="button" class="btn btn-lg btn-primary " (click)="addCourse(titleC,author)">Save </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  
+   
+      
+      <div class="modal modal-sheet position-static d-block " id="modalSheet1">
+            
+    <div class="modal-dialog ">
+    <div class="modal-content ">
+    <div class="modal-header ">
+                  <h1 class="modal-title fs-5">Add Module</h1>
+                  </div>
+                  <div class="modal-body py-0">
+                  <br />
+                  Enter module name:
+                  <input [(ngModel)]="titleM">
+                  <br />
+                  <br />
+                  
+              </div>
+              <div class="modal-footer flex-column border-top-0">
+                  <button type="button" class="btn btn-lg btn-primary " (click)="addModule(titleM)">Save </button>
+              </div>
+          </div>
+      </div>
+  </div>
 
 
 
-
-                            </div>
+  
+      <div class="modal modal-sheet position-static d-block " id="modalSheet1">
+      <div class="modal-dialog ">
+      <div class="modal-content ">
+      <div class="modal-header ">
+                  <h1 class="modal-title fs-5">Add Lesson</h1>
+                  </div>
+                  <div class="modal-body py-0">
+                  <br />
+                  Enter lesson title:
+                  <input [(ngModel)]="titleL">
+                  <br />
+              </div>
+              <div class="modal-footer flex-column border-top-0">
+              <button type="button" class="btn btn-lg btn-primary " (click)="addLesson(titleL)">Save </button>
+              </div>
+          </div>
+      </div>
+  </div>
+  
